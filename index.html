@@ -1,181 +1,312 @@
 <html>
 
 <head>
-	<link href = "css/reset.css" rel="stylesheet" type = "text/css"/>
-	<link href = "css/main.css" rel="stylesheet" type = "text/css"/>
+	 <link href = "css/reset.css" rel="stylesheet" type = "text/css"/>
+	 <link href = "css/main.css" rel="stylesheet" type = "text/css"/>
+	 <link href='http://fonts.googleapis.com/css?family=Arimo|Ubuntu|Audiowide|Roboto|Vollkorn' rel='stylesheet' type='text/css'>
+	 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-	<div id='selectLevelDiv' style="display:none;">
-		<div id='tableTitle'>
-			<label id='tableTitleLabel'>SELECT LEVEL</label>
+	<!--
+	<div id="navBar">
+	</div> -->
+
+<div id="frontPage">
+	<div id="buttons">
+		<div class="mainButtonDiv">
+			<img class="mainImages" src="Images/controllerIcon.png"></img>
+			<button class="mainButtons" id="startButton" onclick="loadLevelPage()">Start</button>
+		</div>
+		<div class="mainButtonDiv">
+			<img class="mainImages" src="Images/gradhatIcon.png"></img>
+			<button class="mainButtons" id="tutorialButton">Tutorial</button>
+		</div>
+		<div class="mainButtonDiv">
+			<img class="mainImages" src="Images/loginIcon.png"></img>
+			<button class="mainButtons" id="loginButton">Login</button>
 		</div>
 	</div>
+</div>
 
-	<div id='selectModeDiv' style="display:none;">
-		<div id='modeTitle'>
-			<label id='modeTitleLabel'>SELECT MODE</label>
-		</div>
-		<div class='modeOptions' id='modeOption1' onclick='optionSelected(1)'>
-			<label class='modeOptionsLabel' id='modeOptionLabel1'>Single Mode</label>
-		</div>
-		<div class='modeOptions' id='modeOption2' onclick='optionSelected(2)'>
-			<label class='modeOptionsLabel' id='modeOptionLabel2'>Double Mode</label>
-		</div>
-		<div class='modeOptions' id='modeOption3' onclick='optionSelected(3)'>
-			<label class='modeOptionsLabel' id='modeOptionLabel3'>Triple Mode</label>
+<div id="levelPage">
+	<div id="firstLine">
+		<div id='selectLevelDiv'></div>
+		<div id='selectModeTypeDiv'></div>
+	</div>
+	<div id="secondLine">
+		<div id='startGameDiv' onclick="loadGamePage()">
+			<label id="startGameDivLabel">Start Game</label>
 		</div>
 	</div>
+</div>
 
-	<div id='startDiv' style="display:none;">
-		<button id='startGameButton' onclick="loadMainGame()">Start Game</button>
+<div id="gamePage">
+	<div id="mainLine">
+		<div id='mainArea'>
+			<div id='grid'></div>
+			<div id='responseButtonsDiv'>
+				<button class="responseButtons" id="positionButton" onclick="buttonPressed(0)">Position (A)</button>
+				<button class="responseButtons" id="shapeButton" onclick="buttonPressed(1)">Shape (S)</button>
+				<button class="responseButtons" id="colorButton" onclick="buttonPressed(2)">Color (D)</button>
+			</div>
+		</div>
+		<div id='infoArea'>
+			<label class="tempLabel" id="numOfTargetTrialLabel">Blah</label>
+			<label class="tempLabel" id="numTypeTrialLabel">Blah</label>
+			<label class="tempLabel" id="maxTrialLabel">Blah</label>
+			<label class="tempLabel" id="targetTrialLabel">Blah</label>
+			<label class="tempLabel" id="typeOfTrialLabel">Blah</label>
+			<label class="tempLabel" id="positionValueLabel">Blah</label>
+			<label class="tempLabel" id="shapeValueLabel">Blah</label>
+			<label class="tempLabel" id="colorValueLabel">Blah</label>
+			<label class="tempLabel" id="buttonPressedLabel">Blah</label>
+			<label class="tempLabel" id="buttonShouldPressedLabel">Blah</label>
+			<label class="tempLabel" id="correctLabel">Blah</label>
+
+
+			<label class="infoLabels" id="gameStatusLabel">Game Starting</label>
+			<label class="infoLabels" id="trialNumberLabel">Trial Number: N/A</label>
+			<label class="infoLabels" id="correctNumberLabel">Correct: N/A</label>
+		</div>
 	</div>
+</div>
 
-	<div id='gameDiv' style="display:none;">
-		<div id='grid'>
-		</div>
-
-		<div id='statusText'>
-			<label id='pressToStart'>Game Starting!</label>
-		</div>
-
-		<div id='buttonDiv'>
-			<button class='stimuliButtons' id='positionButton' onclick='buttonPressed(0)'>Position (A)</button>
-			<button class='stimuliButtons' id='shapeButton' onclick='buttonPressed(2)'>Shape (S)</button>
-			<button class='stimuliButtons' id='colorButton' onclick='buttonPressed(1)'>Color (D)</button>
-		</div>
-	</div>
 </body>
 
 <script>
-	var totalLevels = 10;
+	var totalLevels = 9;
+	var unlockedLevel = 4;
 	var numOfSquares = 9;
+	var level = 1;
+	var mode = 1;
 
-	var unlockedLevel = 3; //Get from database after
-	var level = 1; //Get level from user selection
-	var mode = 1; //Modes: single, dual, triple, get from user selection
-
-	//Move to css file after
 	window.onload = function()
 	{
-		//Get original size of backgroundGrid.png
-	    var gridImage = new Image();
-	    gridImage.onload = function() 
-	    {
-	    	var grid = document.getElementById('grid');
-			grid.style.width = gridImage.height;
-			grid.style.height = gridImage.width;
-	    }
-	    gridImage.src = 'Images/backgroundGrid.png';
+		loadAllItems();
+		document.getElementById('frontPage').style.display = "";
+		document.getElementById('levelPage').style.display = "none";
+		document.getElementById('gamePage').style.display = "none";
+	}
 
-	    for(var i=0; i<numOfSquares; i++)
+	function loadLevelPage()
+	{
+		//Eventually change to get last level/mode from database
+		levelSelected(1);
+		modeTypeSelectedFunction(2);
+		window.scrollTo(0,0);
+		document.getElementById('frontPage').style.display = "none";
+		document.getElementById('levelPage').style.display = "";
+		document.getElementById('gamePage').style.display = "none";
+	}
+
+	function loadGamePage()
+	{
+		minTrial = level+1;
+		maxTrial = 20+(mode*5)+level;
+		setGameButtons();
+		window.scrollTo(0,0);
+		document.getElementById('frontPage').style.display = "none";
+		document.getElementById('levelPage').style.display = "none";
+		document.getElementById('gamePage').style.display = "";
+		startGame();
+	}
+
+	function loadAllItems()
+	{
+		//Capitalize all button text
+		var mainButtons = document.getElementsByClassName("mainButtons");
+		for(var i=0; i<mainButtons.length; i++)
+		{
+			mainButtons[i].innerText = mainButtons[i].innerText.toUpperCase();
+		}
+
+		//Add squares to level selection
+		var selectLevelDiv = document.getElementById('selectLevelDiv');
+		for(var i=1; i<=totalLevels; i++)
+		{
+			var levelDiv = document.createElement('div');
+			levelDiv.className = "levelDivs";
+			levelDiv.id = "levelDiv"+i;
+			levelDiv.myLevel = i;
+
+			var levelModeCompleted = document.createElement("div");
+			levelModeCompleted.className = "levelModesCompleted";
+			levelModeCompleted.id = "levelModeCompleted"+i;
+
+			if(i<=3)
+			{
+				levelDiv.style.top = 15+'px';
+				levelModeCompleted.style.top = 15+'px';
+			}
+			else if(i <= 6)
+			{
+				levelDiv.style.top = 145 + 'px';
+				levelModeCompleted.style.top = 145+'px';
+			}
+			else
+			{
+				levelDiv.style.top = 275 + 'px';
+				levelModeCompleted.style.top = 275+'px';
+			}
+
+			if((i-1)%3 == 0)
+			{
+				levelDiv.style.left = 66+'px';
+				levelModeCompleted.style.left = 168+'px';
+			}
+			else if((i-1)%3 == 1)
+			{
+				levelDiv.style.left = 298+'px';
+				levelModeCompleted.style.left = 400+'px';
+			}
+			else
+			{
+				levelDiv.style.left = 530+'px';
+				levelModeCompleted.style.left = 632+'px';
+			}
+
+			var levelDivLabel = document.createElement("label");
+			levelDivLabel.className = "levelDivLabels";
+			levelDivLabel.id = "levelDivLabel"+i;
+			levelDivLabel.innerHTML = i;
+
+			levelDiv.appendChild(levelDivLabel);
+			selectLevelDiv.appendChild(levelDiv);
+			selectLevelDiv.appendChild(levelModeCompleted);
+
+			if(i <= unlockedLevel )
+			{
+				levelDiv.onclick = function(){levelSelected(this.myLevel);};
+				levelDiv.onmouseover = function(){displayLevelMode(this.myLevel);};
+				levelDiv.onmouseout = function(){hideLevelMode();};	
+			}
+			else
+			{
+				levelDiv.className = "levelDivLocked";
+			}
+		}
+
+		//Add Modes to level selection
+		var selectModeTypeDiv = document.getElementById("selectModeTypeDiv");
+		for (var i=1; i<=3; i++)
+		{
+			var modeTypeDiv = document.createElement('div');
+			modeTypeDiv.className = "modeTypeDivs";
+			modeTypeDiv.id = "modeTypeDiv"+i;
+			modeTypeDiv.myMode = i;
+			modeTypeDiv.style.top = (i-1)*130+15+'px';
+
+			var modeTypeDivLabel = document.createElement('label');
+			modeTypeDivLabel.className = "modeTypeDivLabels";
+			modeTypeDivLabel.id = "modeTypeDivLabel"+i;
+
+			if(i == 1)
+				modeTypeDivLabel.innerHTML = "Single Mode";
+			if(i == 2)
+				modeTypeDivLabel.innerHTML = "Double Mode";
+			if(i == 3)
+				modeTypeDivLabel.innerHTML = "Triple Mode";
+
+			modeTypeDiv.appendChild(modeTypeDivLabel);
+			selectModeTypeDiv.appendChild(modeTypeDiv);
+
+			modeTypeDiv.onclick = function(){modeTypeSelectedFunction(this.myMode);}
+		}
+
+		//Add grid squares
+		for(var i=0; i<numOfSquares; i++)
 	    {
 	    	var shapeImage = document.createElement("img");
-	    	shapeImage.className = "shape";
-	    	shapeImage.id = "shape"+i;
+	    	shapeImage.className = "shapeImages";
+	    	shapeImage.id = "shapeImage"+i;
 	    	shapeImage.src = 'Images/Grid/red_square.png';
 	    	shapeImage.style.left = (i%3)*(1/3)*100+1.5+'%';
 	    	shapeImage.style.top = Math.floor(i/3)*100*(1/3)+1.5+'%';
 	    	document.getElementById('grid').appendChild(shapeImage);   
 	    }
-
-	    for(var i=1; i<=totalLevels; i++)
-		{
-			var levelRow = document.createElement("div");
-			levelRow.className = "individualLevel";
-			levelRow.id = "levelDiv"+i;
-
-			if(i <= unlockedLevel)
-			{
-				levelRow.className += ' nonLockedLevels';
-				levelRow.myLevel = i;
-				levelRow.onclick = function(){
-					levelSelected(this.myLevel);
-				};
-			}
-
-			var levelRowLabel = document.createElement("label");
-			levelRowLabel.className = "individualLabel";
-			levelRowLabel.id = "levelLabel"+i;
-			levelRowLabel.innerHTML = "Level "+i;
-
-			if(i > unlockedLevel)
-			{
-				var levelBlurImage = document.createElement("img");
-				levelBlurImage.id = "levelBlur"+i;
-				levelBlurImage.className = "individualBlurLocked";
-				levelBlurImage.src = "Images/blurredLock.png";
-				levelRow.appendChild(levelBlurImage);
-			}
-
-			levelRow.appendChild(levelRowLabel);
-			document.getElementById('selectLevelDiv').appendChild(levelRow);
-		}
-
-		levelSelected(unlockedLevel);
-
-		document.getElementById('selectLevelDiv').style.display = "";
-		document.getElementById('selectModeDiv').style.display = "";
-		document.getElementById('startDiv').style.display = "";
 	}
 
 	function levelSelected(value)
 	{
 		level = value;
 
-		var allUnlockedLevels = document.getElementsByClassName("nonLockedLevels");
+		var levelDivSelected = document.getElementsByClassName("levelDivSelected");
+		var levelDivLabelSelected = document.getElementsByClassName("levelDivLabelSelected");
+		var levelModesCompletedSelected = document.getElementsByClassName("levelModesCompletedSelected");
 
-		for(var s=0; s<allUnlockedLevels.length; s++)
+		for(var i=0; i<levelDivSelected.length; i++)
 		{
-			allUnlockedLevels[s].style.backgroundColor = "white";
+			levelDivSelected[i].className = "levelDivs";
+			levelDivLabelSelected[i].className = "levelDivLabels";
+			levelModesCompletedSelected[i].className = "levelModesCompleted";
 		}
-
-		var levelSelect = document.getElementById('levelDiv'+value);
-		levelSelect.style.backgroundColor = "green";
+		
+		document.getElementById('levelDiv'+value).className = "levelDivSelected";
+		document.getElementById('levelDivLabel'+value).className = "levelDivLabelSelected";
+		document.getElementById('levelModeCompleted'+value).className = "levelModesCompletedSelected";
 	}
 
-	optionSelected(1); 
-	function optionSelected(value)
+	function displayLevelMode(value)
+	{
+		var levelModeCompleted = document.getElementById("levelModeCompleted"+value).style.visibility = "visible";
+	}
+
+	function hideLevelMode()
+	{
+		var levelModesCompleted = document.getElementsByClassName("levelModesCompleted");
+		for(var i=0; i<levelModesCompleted.length; i++)
+		{
+			levelModesCompleted[i].style.visibility = "hidden";
+		}
+	}
+
+	function modeTypeSelectedFunction (value)
 	{
 		mode = value;
 
-		var allModes = document.getElementsByClassName("modeOptions");
-		for(var s=0; s<allModes.length; s++)
+		var modeTypeSelected = document.getElementsByClassName("modeTypeDivSelected");
+		var modeTypeLabelSelected = document.getElementsByClassName("modeTypeDivLabelSelected");
+
+		for(var i=0; i<modeTypeSelected.length; i++)
 		{
-			allModes[s].style.backgroundColor = "white";
+			modeTypeSelected[i].className = "modeTypeDivs";
+			modeTypeLabelSelected[i].className = "modeTypeDivLabels";
 		}
 
-		var modeSelected = document.getElementById('modeOption'+value);
-		modeSelected.style.backgroundColor = "green";
+		document.getElementById('modeTypeDiv'+value).className = "modeTypeDivSelected";
+		document.getElementById('modeTypeDivLabel'+value).className = "modeTypeDivLabelSelected";
 	}
 
-	function loadMainGame()
+	function setGameButtons()
 	{
-		minTrial = level+1;
-		maxTrial = 20+(mode*5)+level;
-
+		positionButton = document.getElementById("positionButton");
+		shapeButton = document.getElementById("shapeButton");
+		colorButton = document.getElementById("colorButton");
+		
 		if(mode == 1)
-	    {
-	    	document.getElementById("shapeButton").style.visibility = "hidden";
-	    	document.getElementById("colorButton").style.visibility = "hidden";
-	    	//Fix position of button
-	    }
-	    else if(mode == 2)
-	    {
-	    	document.getElementById("shapeButton").style.visibility = "hidden";
-	    }
-
-		window.scrollTo(0,0);
-
-		document.getElementById('selectLevelDiv').style.display = "none";
-		document.getElementById('selectModeDiv').style.display = "none";
-		document.getElementById('startDiv').style.display = "none";
-		document.getElementById('gameDiv').style.display = "";
-
-		startGame();
+		{
+			positionButton.disabled = false;
+			shapeButton.disabled = true;
+			colorButton.disabled = true;
+		}
+		else if(mode == 2)
+		{
+			positionButton.disabled = false;
+			shapeButton.disabled = true;
+			colorButton.disabled = false;
+		}
+		else
+		{
+			positionButton.disabled = false;
+			colorButton.disabled = false;
+			shapeButton.disabled = false;
+		}
 	}
 
-	//All other global variables required for the game
+
+
+
 	var trialNumber = 0;
 	var typeOfTrial;
 	var targetTrials = [];
@@ -194,20 +325,22 @@
 
 	var correct = 0;
 
-
 	function startGame()
 	{
 		//Get target trials
 		getTrials();
+		document.getElementById('maxTrialLabel').innerHTML = "maxTrialLabel: "+maxTrial;
 
 		var mainInterval = setInterval(function(){
+			document.getElementById("gameStatusLabel").innerHTML = "Game In Progress";
+
 			trialNumber++;
 			clearToDefault();
-			
+
 			getTypeOfTrial();
-			/*document.write(trialNumber+')'+typeOfTrial+' maxTrial: '+maxTrial);
-			document.write("<br>");*/
-			
+
+			document.getElementById('trialNumberLabel').innerHTML = "Trial Number: " + trialNumber;
+
 			displayTrial();
 			setTimeout(clearGrid, 500);
 
@@ -215,10 +348,19 @@
 				setTimeout(checkCorrect, 2500);
 
 			if(trialNumber >= maxTrial)
-			{
 				clearInterval(mainInterval);
-			}
+
 		}, 2600);
+	}
+
+	function getRandomNumber(low, high)
+	{
+		return Math.floor((Math.random()*(high-low+1)))+low;
+	}
+
+	function buttonPressed(number)
+	{
+		buttonValues[number] = true;
 	}
 
 	function getTrials()
@@ -252,10 +394,8 @@
 			numOfTargetTrials += numTypeTrials[i];
 		}
 
-		/*document.write('numOfTargetTrials: '+numOfTargetTrials);
-		document.write("<br>");
-		document.write('numTypeTrials: '+numTypeTrials);
-		document.write("<br>");*/
+		document.getElementById("numOfTargetTrialLabel").innerHTML = "numOfTargetTrials: "+numOfTargetTrials;
+		document.getElementById("numTypeTrialLabel").innerHTML = "numTypeTrials: " + numTypeTrials;
 
 		while(targetTrials.length < numOfTargetTrials)
 		{
@@ -274,9 +414,8 @@
 			if(!found)
 				targetTrials[targetTrials.length] = targetTrial;
 		}
-		/*
-		document.write('targetTrials: '+targetTrials)
-		document.write("<br>");*/
+		document.getElementById("targetTrialLabel").innerHTML = "targetTrials: "+targetTrials;
+
 	}
 
 	function clearToDefault()
@@ -309,18 +448,17 @@
 					typeOfTrial = 'position&color&shape';
 			}
 		}
+		document.getElementById("typeOfTrialLabel").innerHTML = trialNumber + ") " + typeOfTrial;
 	}
 
 	function displayTrial()
 	{
-		
-
 		//Check whether to get a random color or a fixed color
 		if(typeOfTrial.indexOf("color") > -1)
 		{
 			//Fixed Color
 			colorValues[trialNumber] = colorValues[trialNumber-level];
-			buttonShouldPressed[1] = true; 
+			buttonShouldPressed[2] = true; 
 		}
 		else
 		{
@@ -337,7 +475,7 @@
 		{
 			//Fixed Shape
 			shapeValues[trialNumber] = shapeValues[trialNumber-level];
-			buttonShouldPressed[2] = true; 
+			buttonShouldPressed[1] = true; 
 		}
 		else
 		{
@@ -366,8 +504,14 @@
 				positionValues[trialNumber] = getRandomNumber(0, 8);
 			}
 		}	
+
+		document.getElementById('positionValueLabel').innerHTML = "positionValueLabel: "+ positionValues[trialNumber];
+		document.getElementById('shapeValueLabel').innerHTML = "shapeValueLabel: "+ shapeValues[trialNumber];
+		document.getElementById('colorValueLabel').innerHTML = "colorValueLabel: "+ colorValues[trialNumber];
+		document.getElementById('buttonShouldPressedLabel').innerHTML = "buttonShouldPressed: "+buttonShouldPressed;
+
 		//Display the fixed or random position
-		var img = document.getElementById('shape'+positionValues[trialNumber]);
+		var img = document.getElementById('shapeImage'+positionValues[trialNumber]);
 
 		if(mode == 2)
 		{
@@ -385,22 +529,17 @@
 	{
 		for(var i=0; i<numOfSquares; i++)
 		{
-			var img = document.getElementById('shape'+i);
+			var img = document.getElementById('shapeImage'+i);
 			img.style.visibility = 'hidden';
 		}
 	}
 
-	function buttonPressed(number)
-	{
-		buttonValues[number] = true;
-	}
-
 	function checkCorrect()
 	{
+		//Something wrong with algorithm?
 		var allCorrect = true;
 
-		//Remove this part after
-		document.getElementById('pressToStart').innerHTML = trialNumber+ ') buttonShouldPressed: '+buttonShouldPressed+' buttonValues: '+buttonValues;
+		document.getElementById('buttonPressedLabel').innerHTML = "buttonPressed: "+buttonValues;
 
 		for(var i=0; i<buttonValues.length; i++)
 		{
@@ -411,14 +550,14 @@
 		if(allCorrect == true)
 			correct += 1;
 
+		document.getElementById('correctLabel').innerHTML = "correct: " + correct;
+		document.getElementById('correctNumberLabel').innerHTML = "Correct: " + correct;
+
 		if(trialNumber >= maxTrial)
-			alert('Total Correct: '+correct);
+			document.getElementById('gameStatusLabel').innerHTML = "Game Completed!";
+		//alert('Total Correct: '+correct);
 	}
 
-	function getRandomNumber(low, high)
-	{
-		return Math.floor((Math.random()*(high-low+1)))+low;
-	}
 </script>
 
 </html>

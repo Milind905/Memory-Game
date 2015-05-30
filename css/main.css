@@ -1,220 +1,434 @@
-/* Body
-**************************************************************/
 html {
-    /* background: url(../images/Orange2.jpg) fixed; */
+}
+
+html::-webkit-scrollbar { 
+    display: none;
 }
 
 body{
-    font: 62.5%/1.5 Arial, Hevetica, sans-serif;
-    overflow:hidden;
-}
-
-#startDiv {
-    text-align:center;
-    display:table;
-    overflow:auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 10%;
-    margin-right: auto;
-    float: left;
-    /*Center Vertically*/
-    /*
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;*/
-}
-
-#startGameButton {
-  background: #63b4e6;
-  background-image: -webkit-linear-gradient(top, #63b4e6, #1a6899);
-  background-image: -moz-linear-gradient(top, #63b4e6, #1a6899);
-  background-image: -ms-linear-gradient(top, #63b4e6, #1a6899);
-  background-image: -o-linear-gradient(top, #63b4e6, #1a6899);
-  background-image: linear-gradient(to bottom, #63b4e6, #1a6899);
-  /*-webkit-border-radius: 19;
-  -moz-border-radius: 19;
-  border-radius: 19px;*/
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 40px;
-  padding: 20px 50px 20px 50px;
-  text-decoration: none;
-}
-
-#startGameButton:hover {
-  background: #a3dafa;
-  background-image: -webkit-linear-gradient(top, #a3dafa, #67b0e0);
-  background-image: -moz-linear-gradient(top, #a3dafa, #67b0e0);
-  background-image: -ms-linear-gradient(top, #a3dafa, #67b0e0);
-  background-image: -o-linear-gradient(top, #a3dafa, #67b0e0);
-  background-image: linear-gradient(to bottom, #a3dafa, #67b0e0);
-  text-decoration: none;
-}
-
-#selectLevelDiv {
-    border:1px solid black;
-
-    width: 300px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 10%;
-    margin-right: auto;
-    float: left;
-}
-
-#tableTitle {
-    /*border-style: solid;*/
-    height: 100px;
-    width: 100%;
-    text-align: center; 
-    padding-top: 50px; 
-}
-
-#tableTitleLabel {
-    font-size: 30px;
-}
-
-.individualLevel {
-    height: 60px;
-    width: 100%;
-   
-    text-align: center;
-    padding-top: 30px;
-    position: relative;
-}
-
-.individualLabel {
-    font-size: 20px;
+  font-family: Roboto, Calibri, Arial;  
 }
 
 /*
-.individualBlur {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    opacity: 0.0;
-    top: 0;
-    left: 0;
-}
-
-.individualBlur:hover {
-    opacity: 1.0;
+#navBar
+{
+  width: 100%;
+  height: 20%;
+  background-color: black;
 }*/
 
-.individualBlurLocked {
-    height: 100%;
-    width: 100%;
-    opacity: 0.9;
-    position: absolute;
-    top: 0;
-    left: 0;
+#frontPage
+{
+  width: 100%;
+  height: 100%;
+  background: url('../Images/memoryRainBackground.png') no-repeat center bottom fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: relative;
+  overflow: auto;
 }
 
-.individualBlurLocked:hover{
-     opacity: 0.4;
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -ms-filter: blur(5px);
-    -o-filter: blur(5px);
-    filter: blur(5px);
+#buttons {   
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  text-align:center;
+  overflow: auto;
+  width: 100%;
 }
 
-.nonLockedLevels:hover {
-    opacity: 0.6;
+.mainButtonDiv {
+  display: inline-block;
+  margin: 20px 50px;
+  max-width: 200px;
+  overflow:hidden;
 }
 
-#selectModeDiv {
-    border:1px solid black;
-    width: 300px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 10%;
-    margin-right: auto;
-    float: left;
+.mainImages {
+  width: 200px;
+  height: 200px;
 }
 
-#modeTitle {
-    height: 100px;
-    width: 100%;
-    text-align: center; 
-    padding-top: 50px; 
+.mainImages:hover {
+  opacity: 0.4;
 }
 
-#modeTitleLabel {
-    font-size: 30px;
+.mainButtons {
+  width: 200px;
+  background: none;
+  border: 2px solid #ACCCA1;
+  color: white;
+  padding: 10px 50px;
+  outline:none;
+  font-family: Source Sans Pro;
+  font-size: 25px;
+  font-weight: normal; 
 }
 
-.modeOptions {
-    height: 60px;
-    width: 100%;   
-    text-align: center;
-    padding-top: 30px;
-}
-
-.modeOptions:hover{
-    opacity: 0.6;
-}
-
-.modeOptionsLabel {
-    font-size: 20px;
+/*add animation*/
+.mainButtons:hover {
+  border-color: white;
 }
 
 
 
 
-#gameDiv {
-    width: 100%;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
 
-    position: absolute;
-    top: 0px;
+
+#levelPage {
+  width: 100%;
+  height: 100%;
+  background: url('../Images/memoryRainBackground.png') no-repeat center bottom fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: relative;
+  overflow: auto;
+}
+
+#firstLine {
+  width: 100%;
+  min-width: 1250px;
+  height: 400px;
+  position: absolute;
+  top: 75px;
+}
+
+#secondLine {
+  width: 100%;
+  min-width: 1250px;
+  height: 100px;
+  position: absolute;
+  top: 525px;
+}
+
+#selectLevelDiv {
+  width: 700px;
+  height: 400px;
+  position: absolute;
+  left: 50px;
+  overflow: auto;
+  background-image: url("../Images/opaqueBackground.png");
+  border-radius: 20px;
+}
+
+#selectModeTypeDiv {
+  width: 350px;
+  height: 400px;
+  position: absolute;
+  right: 50px;
+  overflow: auto;
+  background-image: url("../Images/opaqueBackground.png");
+  border-radius: 20px;
+}
+
+#startGameDiv {
+  width: 300px;
+  height: 100px;
+  margin: 0px auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  text-align: center;
+  background: #ff0000;
+  background-image: -webkit-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -moz-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -ms-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -o-linear-gradient(top, #ff0000, #cf0000);
+  background-image: linear-gradient(to bottom, #ff0000, #cf0000);
+}
+
+#startGameDivLabel {
+  color: white;
+  height: 100px; 
+  line-height: 100px;
+  font-family: Source Sans Pro;
+  font-size: 40px;
+}
+
+#startGameDiv:hover {
+  background: white;
+  border-color: white;
+}
+
+#startGameDiv:hover #startGameDivLabel {
+  color: red;
+}
+
+.levelDivs {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  /*margin: 10px 0px;*/
+  text-align: center;
+  background: #ff0000;
+  background-image: -webkit-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -moz-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -ms-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -o-linear-gradient(top, #ff0000, #cf0000);
+  background-image: linear-gradient(to bottom, #ff0000, #cf0000);
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.levelDivs:hover {
+  background: none;
+  border-color: red;
+}
+
+.levelDivs:hover .levelDivLabels{
+  color: red;
+}
+
+.levelDivLabels {
+  color: white;
+  height: 100px; 
+  line-height: 100px;
+  font-family: Source Sans Pro;
+  font-size: 40px;
+}
+
+.levelDivSelected {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  background: white;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.levelDivLabelSelected {
+  color: red;
+  height: 100px; 
+  line-height: 100px;
+  font-family: Source Sans Pro;
+  font-size: 40px;
+}
+
+.levelModesCompleted {
+  /*Change to an image after*/
+  background-color: black;
+  opacity: 0.5;
+  
+  position: absolute;
+  width: 30px;
+  height: 100px;
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.levelModesCompletedSelected {
+  /*Change to an image after*/
+  background-color: black;
+  opacity: 0.4;
+  
+  position: absolute;
+  width: 30px;
+  height: 100px;
+  border-radius: 10px;
+  visibility: visible;
+}
+
+.levelDivLocked {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  background: #ff0000;
+  background-image: -webkit-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -moz-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -ms-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -o-linear-gradient(top, #ff0000, #cf0000);
+  background-image: linear-gradient(to bottom, #ff0000, #cf0000);
+  border: 1px solid white;
+  border-radius: 10px;
+  opacity: 0.2;
+}
+
+.modeTypeDivs {
+  position: absolute;
+  width: 250px;
+  height: 100px;
+  left: 50px;
+  border: 1px solid white;
+  border-radius: 10px;
+  text-align: center;
+
+  background: #ff0000;
+  background-image: -webkit-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -moz-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -ms-linear-gradient(top, #ff0000, #cf0000);
+  background-image: -o-linear-gradient(top, #ff0000, #cf0000);
+  background-image: linear-gradient(to bottom, #ff0000, #cf0000);
+}
+
+.modeTypeDivs:hover {
+  border-color: red;
+  background: none;
+}
+
+.modeTypeDivs:hover .modeTypeDivLabels {
+  color: red;
+}
+
+.modeTypeDivLabels {
+  color: white;
+  height: 100px; 
+  line-height: 100px;
+  font-family: Source Sans Pro;
+  font-size: 30px;
+}
+
+.modeTypeDivSelected {
+  position: absolute;
+  width: 250px;
+  height: 100px;
+  left: 50px;
+  border: 1px solid white;
+  border-radius: 10px;
+  text-align: center;
+  background-color: white;
+}
+
+.modeTypeDivLabelSelected {
+  color: red;
+  height: 100px; 
+  line-height: 100px;
+  font-family: Source Sans Pro;
+  font-size: 30px;
+}
+
+
+
+
+
+
+
+
+#gamePage {
+  width: 100%;
+  height: 100%;
+  background: url('../Images/memoryRainBackground.png') no-repeat center bottom fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: relative;
+  overflow: auto;
+}
+
+#mainLine {
+  width: 100%;
+  min-width: 1250px;
+  height: 550px;
+  position: absolute;
+  top: 50px;
+}
+
+#mainArea {
+  width: 650px;
+  height: 550px;
+  position: absolute;
+  left: 50px;
+  /*overflow: auto;*/
+  background-image: url("../Images/opaqueBackground.png");
+  border-radius: 20px;
+}
+
+#infoArea {
+  width: 400px;
+  height: 550px;
+  position: absolute;
+  right: 50px;
+  /*overflow: auto;*/
+  background-image: url("../Images/opaqueBackground.png");
+  border-radius: 20px;
 }
 
 #grid {
-    margin-left: auto;
-    margin-right: auto;
-    background-image: url('../Images/backgroundGrid.png');
-    background-repeat: no-repeat;
-    position: relative;
+  border: 2px solid black;
+  width: 350px;
+  height: 350px;
+  margin: 30px auto;
+  background: url("../Images/backgroundGrid.png") no-repeat center;
+  position: relative;
 }
 
-
-.shape {
-    max-width: 30%;
-    max-height: 30%;
-    position: absolute;
-    visibility: hidden;
+.shapeImages{
+  max-width: 30%;
+  max-height: 30%;
+  position: absolute;
+  visibility: hidden;
 }
 
-#statusText {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;  
+#responseButtonsDiv {
+  width: 100%;
+  margin-bottom: 30px;
+  text-align:center;
+  overflow: auto;
 }
 
-#pressToStart {
-    font-size: 20pt;
-    font-weight: bold;
-    color: Orange;
+.responseButtons {
+  height: 55px;
+  width: 150px;
+  margin: 25px 25px;
+  background: url("../Images/woodTexture.png") no-repeat center;
+  border: 2px solid #C0C0C0;
+  border-radius: 10px;
+  color: white;
+  font-family: Source Sans Pro;
+  font-size: 20px;
+  font-weight: normal; 
+  outline:none;
+  opacity: 1.0;
 }
 
-#buttonDiv {
-    margin-left: auto;
-    margin-right: auto;
-    width: 520px;
+.responseButtons:hover {
+  height: 61px;
+  width: 156px;
+  margin: 22px 22px;
+  border: 2px solid red;
+  outline:none;
 }
 
-.stimuliButtons {
-    margin-left: 10px;
-    margin-right: 10px;
-    height: 30px;
-    width: 150px;
+.responseButtons:disabled {
+  opacity: 0.3;
 }
 
+.responseButtons:disabled:hover {
+  height: 55px;
+  width: 150px;
+  margin: 25px 25px;
+  border: 2px solid #C0C0C0;
+  outline: none;
+}
+
+.infoLabels {
+  width: 400px;
+  height: 20px;
+  margin: 5px;
+  position: relative;
+  color: white;
+  display: inline-block;
+  text-align: left;
+}
+
+/*
+ToDo: 
+Nav bar on side/top
+Animation when changing pages
+Image for completed modes for each level (stars?)
+*/
+
+.tempLabel {
+  width: 400px;
+  height: 20px;
+  position: relative;
+  color: white;
+  display: inline-block;
+  visibility: hidden;
+}
